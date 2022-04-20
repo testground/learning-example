@@ -15,10 +15,10 @@ func PublishMessage(queueName string, data []byte) {
 	defer ch.Close()
 
 	err = ch.Publish(
-		"",            // exchange
-		TestQueueName, // routing key
-		false,         // mandatory
-		false,         // immediate
+		"",        // exchange
+		queueName, // routing key
+		false,     // mandatory
+		false,     // immediate
 		amqp.Publishing{
 			ContentType: "text/plain",
 			Body:        data,
