@@ -12,6 +12,33 @@ import (
 
 var rabbitConnection *amqp.Connection
 
+func AssertQueue(conn *amqp.Connection, queueName string) {
+	ch, err := conn.Channel()
+	util.FailOnError(err, "Error opening rabbitMq channel")
+
+	defer ch.Close()
+	// declare the queues we need
+	_, err = ch.QueueDeclare(
+		queueName, // name
+		false,     // durable
+		false,     // autodelete
+		false,     // exclusive
+		false,     // no wait
+		nil,       // arguments
+	)
+	util.FailOnError(err, "Error declaring queue")
+}
+
+func DeleteQueue(conn *amqp.Connection, queueName string) {
+	ch, err := conn.Channel()
+	util.FailOnError(err, "Error opening rabbitMq channel")
+
+	defer ch.Close()
+
+	_, err = ch.QueueDelete(queueName, false, false, false)
+	util.FailOnError(err, "Failed deleting queue")
+}
+
 // Returns the connection to RabbitMq. If the connection is not established, will attempt to
 // establish it, with a specified timeout period
 func GetConnection() *amqp.Connection {

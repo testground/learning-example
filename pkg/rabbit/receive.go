@@ -8,6 +8,7 @@ import (
 
 func GetQueueChannel(queueName string) <-chan amqp.Delivery {
 	conn := GetConnection()
+	AssertQueue(conn, queueName)
 
 	ch, err := conn.Channel()
 	util.FailOnError(err, "Error opening rabbitMq channel")

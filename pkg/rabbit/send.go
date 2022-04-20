@@ -8,6 +8,7 @@ import (
 
 func PublishMessage(queueName string, data []byte) {
 	conn := GetConnection()
+	AssertQueue(conn, queueName)
 
 	ch, err := conn.Channel()
 	util.FailOnError(err, "Error opening rabbitMq channel")
