@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  chainlistener:
-    image: chainlistener
+  tg-learning-example:
+    image: tg-learning-example
     build:
       context: .
       dockerfile: ./Dockerfile

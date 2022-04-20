@@ -15,7 +15,7 @@ RUN apk --no-cache add ca-certificates
 RUN mkdir /app
 COPY --from=builder /go/src/app/build /app
 WORKDIR /app
-RUN chmod +x /app/chain-example
-ENTRYPOINT /app/chain-example
-LABEL Name=chainlistener Version=0.0.1
+RUN chmod +x /app/learning-example
+ENTRYPOINT /app/learning-example
+LABEL Name=tg-learning-example Version=0.0.1
 EXPOSE 8081
